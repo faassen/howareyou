@@ -16,7 +16,7 @@ To run them you can use the following::
 
   $ virtualenv --python=python2 env/py2
   $ source env/py2/bin/activate
-  $ pip install -U pip setuptools 
+  $ pip install -U pip setuptools
   $ pip install -r requirements.txt
 
 You can now use the ``howareyou`` tool::
