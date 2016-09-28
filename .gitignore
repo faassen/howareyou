@@ -1,0 +1,21 @@
+# Byte-compiled / optimized
+__pycache__/
+*.py[co]
+
+# Distribution / packaging
+*.egg-info/
+/build/
+/dist/
+
+# Virtualenv
+/env/
+/src/
+
+# Unit test / coverage reports
+.cache/
+/.coverage
+/htmlcov
+/.tox
+
+# Sphinx documentation
+/doc/build/

@@ -1,0 +1,9 @@
+bottle == 0.12.9
+Django == 1.9.5
+falcon == 1.0.0rc2
+flask == 0.10.1
+morepath == 0.15
+reg == 0.9.3
+pyramid == 1.6
+tornado == 4.3
+wheezy.web == 0.1.485
