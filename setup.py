@@ -33,6 +33,7 @@ setup(
     entry_points={
         'console_scripts': [
             'howareyou = howareyou.main:main',
+            'trialserver = howareyou.trial:main',
         ],
     }
 )
