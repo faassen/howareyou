@@ -35,20 +35,23 @@ def run(benchmark, frameworks, number, do_profile):
         if not os.path.isdir(framework_path):
             print("No benchmark for:", framework)
             continue
+        if framework != 'wsgi':
+            try:
+                __import__(framework)
+            except ImportError:
+                print("%s not installed" % framework)
+                continue
         os.chdir(framework_path)
-        try:
-            main = __import__('app', None, None, ['main']).main
-
-            f = lambda: list(main(environ.copy(), start_response))
-            time = timeit(f, number=number)
+        main = __import__('app', None, None, ['main']).main
+        f = lambda: list(main(environ.copy(), start_response))
+        time = timeit(f, number=number)
+        st = Stats(profile.Profile().runctx(
+            'f()', globals(), locals()))
+        print("%-11s %6.0f %7.0f %7d %6d" % (
+            framework, 1000 * time,
+            number / time, st.total_calls, len(st.stats)))
+        if do_profile:
             st = Stats(profile.Profile().runctx(
-                'f()', globals(), locals()))
-            print("%-11s %6.0f %7.0f %7d %6d" % (framework, 1000 * time,
-                  number / time, st.total_calls, len(st.stats)))
-            if do_profile:
-                st = Stats(profile.Profile().runctx(
-                    'timeit(f, number=number)', globals(), locals()))
-                st.strip_dirs().sort_stats('time').print_stats(10)
-            del sys.modules['app']
-        except ImportError:
-            print("%-15s not installed" % framework)
+                'timeit(f, number=number)', globals(), locals()))
+            st.strip_dirs().sort_stats('time').print_stats(10)
+        del sys.modules['app']
