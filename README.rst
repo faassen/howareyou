@@ -71,6 +71,19 @@ You can give it a ``-h`` for help. With ``-p`` you can select the
 benchmark, and with ``-f`` you can select the frameworks against which
 to run it.
 
+Testing implementations
+-----------------------
+
+To check whether an implementation of a benchmark in a particular
+framework actually is correct, you can use the ``trialserver``
+command. For example, to check whether Morepath behaves correctly with
+the ``hello`` benchmark use::
+
+  $ trialserver hello morepath
+
+It starts up a web server on port 8000. You can point your web browser
+to it and make experimental requests.
+
 History
 -------
 
